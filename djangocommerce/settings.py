@@ -21,9 +21,13 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'rmi_mq*0#*2+jd+r^3f%ku%2^+b)(l0=6c@dcb#_%o337rim+m'
+
+SECRET_KEY = os.getenv('SECRET_KEY','123')
+
+#SECRET_KEY = 'rmi_mq*0#*2+jd+r^3f%ku%2^+b)(l0=6c@dcb#_%o337rim+m'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+
 DEBUG = False
 
 ALLOWED_HOSTS = []
@@ -38,6 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #libs
+    'widget_tweaks', #Auxilia a manipular as classes das tags de input do form
+    #apps
     'core',
     'catalog',
 ]
@@ -77,8 +84,14 @@ WSGI_APPLICATION = 'djangocommerce.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config()
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.9/ref/settings/#auth-password-validators
@@ -116,13 +129,25 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+#Databases e Deploy heroku
+
+db_for_env = dj_database_url.config()
+
+DATABASES['default'].update(db_for_env)
+
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ALLOWED_HOSTS = ['*']
 
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
+#E-mail
+EMAIL_HOST= ''
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+DEFAULT_FROM_EMAIL = 'admin@djangocommerce.com'
+
 try:
-    from local_settings import *
+    from .local_settings import *
 except ImportError:
     pass

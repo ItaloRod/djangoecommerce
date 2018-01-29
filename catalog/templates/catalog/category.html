@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load pagination %}
 {% block title %}
 {{current_category}} | {{ block.super }}
 {% endblock title %}  
@@ -25,8 +25,8 @@
               </div>
           </div>
       </div>   
-
     {% endfor %}
     </div>
+    {% pagination request paginator page_obj %}
 </div>
 {% endblock container %}
