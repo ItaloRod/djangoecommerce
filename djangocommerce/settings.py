@@ -37,7 +37,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'django.contrib.auth',
+    'django.contrib.auth', #manter esse app no sistema visto que os grupos e permissões serão utilizados no sistema. Caso contrário remova-a.
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     #apps
     'core',
     'catalog',
+    'accounts',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -138,7 +139,14 @@ EMAIL_HOST_USER = ''
 EMAIL_HOST_PASSWORD = ''
 DEFAULT_FROM_EMAIL = 'admin@djangocommerce.com'
 
+#auth
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_URL = 'logout'
+AUTH_USER_MODEL = 'accounts.User'
+
 try:
-    from local_settings import *
+    from .local_settings import *
 except ImportError:
     pass
