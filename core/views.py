@@ -32,8 +32,7 @@ class contactView(FormView):
     success_url = reverse_lazy('index')
 
     def form_valid(self, form):
-        form.send_mail()
-            
+        form.send_mail() 
         return super().form_valid(form)
 
 
