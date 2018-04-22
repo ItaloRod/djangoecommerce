@@ -1,7 +1,7 @@
-#Django E-Commerce
+# Django E-Commerce
 Projeto realizado em paralelo com as aulas da Udemy
 
-##Iniciando
+## Iniciando
 
 ### Pré-requisitos
 Antes de iniciar, verifique se o ambiente de desenvolvimento possui essas ferramentas disponíveis:
