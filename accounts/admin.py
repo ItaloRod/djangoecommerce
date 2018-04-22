@@ -2,9 +2,32 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from .models import User
+from .forms import UserAdminCreationForm, UserAdminForm
+
+# Fieldsets são responsaveis pelos nomes dos campos. 
+# Eles são formados por tuplas de tuplas
+# Cada tupla representa uma legenda que posta em cada campo
+# e dentro da tupla há um dicionário que conterá informações sobre o fieldset
 
 class UserAdmin(BaseUserAdmin):
-
+    add_form = UserAdminCreationForm
+    add_fieldsets = (
+        (None,{
+            'fields': ('username', 'email', 'password1','password2')
+        }),
+    )
+    form = UserAdminForm
+    fieldsets = (
+        (None,{
+            'fields':('username', 'email')
+        }),
+        ('Informações Básicas', {
+            'fields':('name','last_login')
+        }),
+        ('Permissões', {
+            'fields':('is_active','is_staff','is_superuser','groups','user_permissions')
+        })
+    )
     list_display = ['username', 'name', 'email','is_active', 'is_staff', 'date_joined'] #campos a serem adicionados a serem listados 
 
 admin.site.register(User, UserAdmin)
