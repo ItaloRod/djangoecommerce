@@ -38,15 +38,6 @@ class contactView(FormView):
 
 contact = contactView.as_view()
 
-class RegisterView(CreateView):
-
-    form_class = UserCreationForm
-    template_name = 'register.html'
-    model = user
-    success_url = reverse_lazy('index')
-
-register = RegisterView.as_view()
-
 # class-based views:
 #   def> Significa utilizar classes para a 
 #   chamada de requisições em vez de utilizar funções.

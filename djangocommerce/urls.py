@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^contato/$',views.contact, name='contact'),
     url(r'^entrar/$',login, {'template_name':'login.html'}, name='login'), #Dicionário altera valores padrões dentro da view Como template_name e form utilizados
     url(r'^sair/$',logout, {'next_page':'index'}, name='logout'), 
-    url(r'^registro/$',views.register, name='register'),
+    url(r'^conta/', include('accounts.urls', namespace='accounts')),
     url(r'^catalogo/',include('catalog.urls', namespace='catalog')),
     url(r'^admin/', admin.site.urls),
 ]
